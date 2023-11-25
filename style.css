@@ -1,32 +1,63 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    font-family: 'Arial', sans-serif;
+    background-color: #333; /* Fondo oscuro */
+    color: #fff; /* Texto en blanco para contraste */
     text-align: center;
 }
+
 #app {
     width: 50%;
     margin: auto;
     padding: 20px;
-    background-color: white;
+    background-color: #444; /* Fondo gris oscuro para la app */
     border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Sombra más marcada */
 }
+
 #taskForm {
     margin-bottom: 20px;
 }
+
 #taskInput {
     padding: 10px;
     width: 70%;
     margin-right: 5px;
+    background-color: #555; /* Fondo de input más oscuro */
+    border: 1px solid #666; /* Bordes más definidos */
+    color: #ddd; /* Texto más claro para el input */
+    border-radius: 5px;
 }
+
 button {
     padding: 10px 20px;
-    background-color: #007bff;
+    background-color: #007bff; /* Color azul para el botón */
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s ease; /* Transición suave para el hover */
 }
+
 button:hover {
-    background-color: #0056b3;
+    background-color: #0056b3; /* Color al pasar el ratón por encima */
+}
+
+/* Estilos para la lista de tareas */
+#tasksList {
+    text-align: left;
+    margin-top: 20px;
+}
+
+#tasksList div {
+    background-color: #555; /* Fondo de cada tarea */
+    color: #fff; /* Texto blanco */
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 3px;
+    transition: transform 0.3s ease, background-color 0.3s ease; /* Transición para el hover */
+}
+
+#tasksList div:hover {
+    background-color: #666; /* Cambio de color en hover */
+    transform: scale(1.02); /* Ligero aumento de tamaño en hover */
 }
