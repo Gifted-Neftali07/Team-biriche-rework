@@ -1,16 +1,19 @@
 <?php
-// Por simplificación, las tareas se almacenan en un array
-// En una implementación real, aquí se conectaría con una base de datos
-$tasks = [];
+$tasksFile = 'tasks.txt'; // Archivo para almacenamiento de tareas
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $task = $_POST['task'] ?? '';
+    $json = file_get_contents('php://input');
+    $data = json_decode($json, true);
+    $task = $data['task'] ?? '';
+
     if ($task) {
-        $tasks[] = $task;
+        file_put_contents($tasksFile, $task . "\n", FILE_APPEND); // Añadir tarea al archivo
         echo "Tarea agregada";
     }
 } else {
-    foreach ($tasks as $task) {
-        echo $task . "<br>";
+    // Si no es una solicitud POST, asumimos que es GET y mostramos las tareas
+    if (file_exists($tasksFile)) {
+        echo file_get_contents($tasksFile);
     }
 }
 ?>

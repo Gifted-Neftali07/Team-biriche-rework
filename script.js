@@ -1,27 +1,32 @@
-// Definir la función para enviar una tarea al servidor
+// Función para añadir tareas al DOM
+function addTaskToDOM(task) {
+    let div = document.createElement('div');
+    div.textContent = task;
+    document.getElementById('tasksList').appendChild(div);
+}
+
+// Función para enviar una tarea al servidor
 function sendTaskToServer(task) {
-    // Hacer una petición fetch al servidor, específicamente al archivo server.php
     fetch('server.php', {
-        method: 'POST', // Método HTTP POST para enviar datos
-        body: JSON.stringify({ task: task }), // Convertir el objeto de la tarea a una cadena JSON
+        method: 'POST',
+        body: JSON.stringify({ task: task }),
         headers: {
-            'Content-Type': 'application/json' // Establecer el tipo de contenido de la solicitud como JSON
+            'Content-Type': 'application/json'
         }
     })
-    .then(response => response.text()) // Convertir la respuesta del servidor a texto
-    .then(data => console.log(data)); // Imprimir la respuesta en la consola del navegador
+    .then(response => response.text())
+    .then(data => {
+        console.log(data);
+        addTaskToDOM(task); // Añadir la tarea al DOM después de enviarla al servidor
+    });
 }
-// Añadir un escuchador de eventos al formulario con ID 'taskForm'
+
+// Manejador de eventos para el formulario
 document.getElementById('taskForm').addEventListener('submit', function(e) {
-    e.preventDefault(); // Prevenir el comportamiento por defecto de envío del formulario
-
-    // Obtener el valor del input con ID 'taskInput'
+    e.preventDefault();
     let task = document.getElementById('taskInput').value;
-
-    // Verificar si el input no está vacío
     if (task) {
-        addTaskToDOM(task); // Llamar a una función para añadir la tarea al DOM
-        sendTaskToServer(task); // Llamar a la función para enviar la tarea al servidor
-        document.getElementById('taskInput').value = ''; // Limpiar el input después de enviar
+        sendTaskToServer(task); // Envía la tarea al servidor
+        document.getElementById('taskInput').value = ''; // Limpia el campo de entrada
     }
 });
